@@ -12,6 +12,7 @@
     <div id="app">
         <app-header></app-header>
         <router-view></router-view>
+        <footer>by Chonable</footer>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     </body>
