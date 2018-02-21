@@ -8,6 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import VueRouter from 'vue-router';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -17,10 +18,31 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('app-header', require('./components/AppHeaderComponent.vue'));
-Vue.component('app-body', require('./components/AppBodyComponent.vue'));
+//Vue.component('app-body', require('./components/AppBodyComponent.vue'));
+
+var Home = Vue.component('home', require('./components/Home.vue'));
+var Register = Vue.component('register', require('./components/Register.vue'));
+
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+    routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: Home
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: Register
+        },
+    ]
+});
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router:router
 });
 
 
