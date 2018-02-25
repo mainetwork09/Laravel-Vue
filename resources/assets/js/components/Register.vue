@@ -1,4 +1,6 @@
 <template>
+<div>
+    <AppHeader></AppHeader>
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -32,18 +34,42 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
-<script>
-export default {
-  data:function(){
-      return {
-          error:false,
-          success:false,
-          name:'',
-          email:'',
-          password:'',
-      }
-  }
-}
+<script> 
+    import AppHeader from './AppHeaderComponent.vue';
+    export default {
+        components:{AppHeader},
+        data(){
+            return {
+                name: '',
+                email: '',
+                password: '',
+                error: false,
+                errors: {},
+                success: false
+            };
+        },
+        methods: {
+            register(){
+                var app = this
+                this.$auth.register({
+                    params: {
+                        name: app.name,
+                        email: app.email,
+                        password: app.password
+                    }, 
+                    success: function () {
+                        app.success = true
+                    },
+                    error: function (resp) {
+                        app.error = true;
+                        app.errors = resp.response.data.errors;
+                    },
+                    redirect: null
+                });                
+            }
+        }
+    }
 </script>
